@@ -1,22 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
-
-import 'either.dart';
-import 'urls.dart';
-
-class ApiService {
-  static ApiMethods get jsonPlaceholder => ApiMethods(
-        baseUrl: Urls.jsonPlaceholderUrl,
-      );
-
-  static ApiMethods get openWeatherMap => ApiMethods(
-        baseUrl: Urls.openWeatherMapUrl,
-      );
-
-  static ApiMethods get theDogApi => ApiMethods(
-        baseUrl: Urls.theDogApiUrl,
-      );
-}
+part of 'api_service.dart';
 
 class ApiMethods {
   ApiMethods({
