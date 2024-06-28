@@ -1,12 +1,18 @@
-import 'either.dart';
+import 'dart:async';
 
-void main() {
-  Either result = Success<String?>(
-    value: null,
-  );
+import 'api_service.dart';
+
+Future<void> main() async {
+  final api = ApiService.jsonPlaceholder;
+
+  final result = await api.get('users');
 
   result.handle(
-    success: (value) {},
-    failure: (type, message) {},
+    success: (value) {
+      print(value);
+    },
+    failure: (type, message) {
+      print(type);
+    },
   );
 }

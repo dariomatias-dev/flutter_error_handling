@@ -2,8 +2,29 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
 import 'either.dart';
+import 'urls.dart';
 
 class ApiService {
+  static ApiMethods get jsonPlaceholder => ApiMethods(
+        baseUrl: Urls.jsonPlaceholderUrl,
+      );
+
+  static ApiMethods get openWeatherMap => ApiMethods(
+        baseUrl: Urls.openWeatherMapUrl,
+      );
+
+  static ApiMethods get theDogApi => ApiMethods(
+        baseUrl: Urls.theDogApiUrl,
+      );
+}
+
+class ApiMethods {
+  ApiMethods({
+    required String baseUrl,
+  }) : _baseUrl = baseUrl;
+
+  final String _baseUrl;
+
   final _dio = Dio();
   final _logger = Logger();
 
@@ -13,7 +34,7 @@ class ApiService {
   }) async {
     return _handleRequest(
       () async {
-        return await _dio.get(path);
+        return await _dio.get('$_baseUrl/$path');
       },
     );
   }
@@ -24,7 +45,7 @@ class ApiService {
   }) async {
     return _handleRequest(
       () async {
-        return await _dio.post(path);
+        return await _dio.post('$_baseUrl/$path');
       },
     );
   }
@@ -35,7 +56,7 @@ class ApiService {
   }) async {
     return _handleRequest(
       () async {
-        return await _dio.patch(path);
+        return await _dio.patch('$_baseUrl/$path');
       },
     );
   }
@@ -46,7 +67,7 @@ class ApiService {
   }) async {
     return _handleRequest(
       () async {
-        return await _dio.put(path);
+        return await _dio.put('$_baseUrl/$path');
       },
     );
   }
@@ -57,7 +78,7 @@ class ApiService {
   }) async {
     return _handleRequest(
       () async {
-        return await _dio.delete(path);
+        return await _dio.delete('$_baseUrl/$path');
       },
     );
   }
