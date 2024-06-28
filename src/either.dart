@@ -8,16 +8,15 @@ abstract class Either<E extends Exception, S> {
       String message,
     ) failure,
   }) {
-    switch (this) {
-      case Success(value: var value):
-        return success(value);
-      case Failure(type: var type, message: var message):
-        return failure(
-          type,
-          message,
-        );
-      default:
-        return null;
+    if (this is Success) {
+      return success((this as Success).value);
+    } else {
+      final result = (this as Failure);
+
+      return failure(
+        result.type,
+        result.message,
+      );
     }
   }
 }
@@ -34,7 +33,7 @@ enum FailureType {
   generic,
 }
 
-class Failure extends Either {
+class Failure<E extends Exception, S> extends Either<E, S> {
   Failure({
     required this.type,
     required this.message,

@@ -1,0 +1,8 @@
+name: dart_error_handling
+description: Dart Error Handling
+
+environment:
+  sdk: '>=2.15.0 <3.0.0'
+
+dependencies:
+  dio: ^5.4.3+1
