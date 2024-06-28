@@ -30,6 +30,15 @@ class Success<S> extends Either<Exception, S> {
 }
 
 enum FailureType {
+  unauthorized,
+  badRequest,
+  notFound,
+  internalServerError,
+  serviceUnavailable,
+  requestTimeout,
+  conflict,
+  methodNotAllowed,
+  tooManyRequests,
   generic,
 }
 
