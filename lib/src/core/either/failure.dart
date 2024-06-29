@@ -10,6 +10,8 @@ enum FailureType {
   conflict,
   methodNotAllowed,
   tooManyRequests,
+  forbidden,
+  badGateway,
   generic,
 }
 

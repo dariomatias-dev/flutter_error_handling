@@ -40,6 +40,12 @@ abstract class Either<E extends Exception, S> {
     Failure failure,
   ) {
     switch (failure.type) {
+      case FailureType.unauthorized:
+        Navigator.pushNamedAndRemoveUntil(
+          getContext(),
+          '/',
+          (route) => false,
+        );
       default:
         _showAlertDialog(
           getContext,
