@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_error_handling/src/core/either/either.dart';
+
 import 'package:flutter_error_handling/src/features/http/status_codes.dart';
 
 import 'package:flutter_error_handling/src/services/api_service/api_service.dart';
+
 import 'package:flutter_error_handling/src/shared/utils/show_loading_screen.dart';
 
 class HttpController {
@@ -26,7 +29,35 @@ class HttpController {
           getContext: _getContext,
           success: (value) {},
           failure: (type, message, handleError) {
-            handleError();
+            switch (type) {
+              case FailureType.badGateway:
+                showDialog(
+                  context: _getContext(),
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text(
+                        'Local Treatment',
+                        textAlign: TextAlign.center,
+                      ),
+                      content: const Text(
+                        'Local error handling',
+                        textAlign: TextAlign.center,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                break;
+              default:
+                handleError();
+            }
           },
         );
       },
