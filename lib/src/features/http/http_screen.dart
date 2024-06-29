@@ -11,7 +11,18 @@ class HttpScreen extends StatefulWidget {
 }
 
 class _HttpScreenState extends State<HttpScreen> {
-  final _controller = HttpController();
+  late HttpController _controller;
+
+  BuildContext _getContext() => context;
+
+  @override
+  void didChangeDependencies() {
+    _controller = HttpController(
+      getContext: _getContext,
+    );
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
