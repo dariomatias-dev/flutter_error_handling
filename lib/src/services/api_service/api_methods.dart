@@ -14,47 +14,61 @@ class ApiMethods {
     String path, {
     Map<String, dynamic>? headers,
   }) async {
-    return _handleRequest(
-      _logger,
-      () async {
-        return await _dio.get('$_baseUrl/$path');
-      },
+    return _callHandleRequest(
+      _dio.get(
+        options: Options(
+          headers: headers,
+        ),
+        '$_baseUrl/$path',
+      ),
     );
   }
 
   Future<Either> post(
     String path, {
     Map<String, dynamic>? headers,
+    Object? data,
   }) async {
-    return _handleRequest(
-      _logger,
-      () async {
-        return await _dio.post('$_baseUrl/$path');
-      },
+    return _callHandleRequest(
+      _dio.post(
+        options: Options(
+          headers: headers,
+        ),
+        '$_baseUrl/$path',
+        data: data,
+      ),
     );
   }
 
   Future<Either> patch(
     String path, {
     Map<String, dynamic>? headers,
+    Object? data,
   }) async {
-    return _handleRequest(
-      _logger,
-      () async {
-        return await _dio.patch('$_baseUrl/$path');
-      },
+    return _callHandleRequest(
+      _dio.patch(
+        options: Options(
+          headers: headers,
+        ),
+        '$_baseUrl/$path',
+        data: data,
+      ),
     );
   }
 
   Future<Either> put(
     String path, {
     Map<String, dynamic>? headers,
+    Object? data,
   }) async {
-    return _handleRequest(
-      _logger,
-      () async {
-        return await _dio.put('$_baseUrl/$path');
-      },
+    return _callHandleRequest(
+      _dio.put(
+        options: Options(
+          headers: headers,
+        ),
+        '$_baseUrl/$path',
+        data: data,
+      ),
     );
   }
 
@@ -62,10 +76,23 @@ class ApiMethods {
     String path, {
     Map<String, dynamic>? headers,
   }) async {
+    return _callHandleRequest(
+      _dio.delete(
+        options: Options(
+          headers: headers,
+        ),
+        '$_baseUrl/$path',
+      ),
+    );
+  }
+
+  Future<Either> _callHandleRequest(
+    Future<Response<dynamic>> request,
+  ) async {
     return _handleRequest(
       _logger,
       () async {
-        return await _dio.delete('$_baseUrl/$path');
+        return await request;
       },
     );
   }
