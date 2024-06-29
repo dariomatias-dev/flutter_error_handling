@@ -14,7 +14,7 @@ abstract class Either<E extends Exception, S> {
     if (this is Success) {
       return success((this as Success).value);
     } else {
-      final result = (this as Failure);
+      final result = this as Failure;
 
       return failure(
         result.type,

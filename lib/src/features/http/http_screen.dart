@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_error_handling/src/features/http/http_controller.dart';
+import 'package:flutter_error_handling/src/features/http/status_codes.dart';
 
 class HttpScreen extends StatefulWidget {
   const HttpScreen({super.key});
@@ -23,6 +24,46 @@ class _HttpScreenState extends State<HttpScreen> {
           child: const Icon(
             Icons.arrow_back_ios_new_rounded,
           ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Status Code:',
+                ),
+                const SizedBox(width: 8.0),
+                DropdownButton(
+                  value: _controller.statusCode,
+                  items: List.generate(
+                    statusCodes.length,
+                    (index) {
+                      final statusCode = statusCodes[index];
+
+                      return DropdownMenuItem(
+                        value: statusCode,
+                        child: Text('$statusCode'),
+                      );
+                    },
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _controller.statusCode = value!;
+                    });
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 12.0),
+            ElevatedButton(
+              onPressed: _controller.request,
+              child: const Text('Request'),
+            ),
+          ],
         ),
       ),
     );
