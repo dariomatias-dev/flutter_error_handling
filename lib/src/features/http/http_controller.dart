@@ -29,38 +29,45 @@ class HttpController {
           getContext: _getContext,
           success: (value) {},
           failure: (type, message, handleError) {
-            switch (type) {
-              case FailureType.badGateway:
-                showDialog(
-                  context: _getContext(),
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text(
-                        'Local Treatment',
-                        textAlign: TextAlign.center,
-                      ),
-                      content: const Text(
-                        'Local error handling',
-                        textAlign: TextAlign.center,
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Ok'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-                break;
-              default:
-                handleError();
-            }
+            _handleError(type, handleError);
           },
         );
       },
     );
+  }
+
+  void _handleError(
+    FailureType type,
+    void Function() handleError,
+  ) {
+    switch (type) {
+      case FailureType.badGateway:
+        showDialog(
+          context: _getContext(),
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                'Local Treatment',
+                textAlign: TextAlign.center,
+              ),
+              content: const Text(
+                'Local error handling',
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+        break;
+      default:
+        handleError();
+    }
   }
 }

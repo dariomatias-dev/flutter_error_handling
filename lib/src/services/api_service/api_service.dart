@@ -12,12 +12,4 @@ class ApiService {
   static ApiMethods get http => ApiMethods(
         baseUrl: Urls.httpUrl,
       );
-
-  static ApiMethods get openWeatherMap => ApiMethods(
-        baseUrl: Urls.openWeatherMapUrl,
-      );
-
-  static ApiMethods get theDogApi => ApiMethods(
-        baseUrl: Urls.theDogApiUrl,
-      );
 }
