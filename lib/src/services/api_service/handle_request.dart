@@ -19,7 +19,7 @@ Future<Either> _handleRequest(
     );
 
     return Failure(
-      type: FailureType.generic,
+      type: FailureType.unknownError,
       message: result.data,
     );
   } on DioException catch (err, stackTrace) {
@@ -38,7 +38,7 @@ Future<Either> _handleRequest(
     );
 
     return Failure(
-      type: FailureType.generic,
+      type: FailureType.unknownError,
       message: err.toString(),
     );
   }

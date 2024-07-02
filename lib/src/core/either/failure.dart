@@ -13,7 +13,15 @@ enum FailureType {
   internalServerError, // 500
   badGateway, // 502
   serviceUnavailable, // 503
-  generic, // For unspecified errors
+  cancel, // For request cancellation
+  connectTimeout, // For connection timeout errors
+  receiveTimeout, // For receiving timeout errors
+  sendTimeout, // For sending timeout errors
+  networkError, // For network related errors
+  badCertificate, // For bad certificate errors
+  badResponse, // For bad response errors
+  connectionError, // For connection errors
+  unknownError, // For unspecified errors
 }
 
 /// Represents a failure in the application.
