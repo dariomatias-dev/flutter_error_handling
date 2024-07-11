@@ -29,14 +29,14 @@ static final _api = ApiService.http;
 To make requests, call the corresponding HTTP method as shown below:
 
 ```dart
-final result = await _api.get('/[path]');
+final result = await _api.get('[path]');
 ```
 
 If there is a header:
 
 ```dart
 final result = await _api.get(
-  '/[path]',
+  '[path]',
   headers: <String, dynamic>{},
 );
 ```
@@ -45,8 +45,51 @@ When there is a body:
 
 ```dart
 final result = await _api.post(
-  '/[path]',
+  '[path]',
   headers: <String, dynamic>{},
   data: <String, dynamic>{},
+);
+```
+
+</br>
+
+## Handling Results
+
+The result of the requests will be an instance of Either, which can be either a success or a failure. To handle the result, access the `handle` method, passing a function to obtain the current context, what to do when a success occurs, and what to do when a failure occurs:
+
+```dart
+result.handle(
+  getContext: _getContext,
+  success: (value) {},
+  failure: (type, message, handleError) {},
+);
+```
+
+When a failure occurs and you want the default handling to be performed, call the `handleError` function:
+
+```dart
+result.handle(
+  getContext: _getContext,
+  success: (value) {},
+  failure: (type, message, handleError) {
+    handleError();
+  },
+);
+```
+
+The default handling will only be applied when `handleError` is called, allowing for local handling as follows:
+
+```dart
+result.handle(
+  getContext: _getContext,
+  success: (value) {},
+  failure: (type, message, handleError) {
+    switch (type) {
+      case FailureType.badGateway:
+        // Local Error Handling
+      default:
+        handleError();
+    }
+  },
 );
 ```
