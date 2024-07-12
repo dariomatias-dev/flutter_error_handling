@@ -70,4 +70,8 @@ class HttpController {
         handleError();
     }
   }
+
+  void close() {
+    _api.close();
+  }
 }
