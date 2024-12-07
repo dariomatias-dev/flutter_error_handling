@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-Future<void> showLoadingScreen(
+Future<T> showLoadingScreen<T>(
   BuildContext context,
-  Future<void> Function() request,
+  Future<T> Function() request,
 ) async {
-  OverlayEntry overlayEntry = OverlayEntry(
+  final overlayEntry = OverlayEntry(
     builder: (context) {
       return Container(
         color: Colors.black.withOpacity(0.8),
@@ -20,7 +20,9 @@ Future<void> showLoadingScreen(
 
   Overlay.of(context).insert(overlayEntry);
 
-  await request();
+  final result = await request();
 
   overlayEntry.remove();
+
+  return result;
 }

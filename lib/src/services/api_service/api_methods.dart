@@ -14,7 +14,7 @@ class ApiMethods {
     String path, {
     Map<String, dynamic>? headers,
   }) async {
-    return _callHandleRequest(
+    return await _callHandleRequest(
       _dio.get(
         options: Options(
           headers: headers,
@@ -29,7 +29,7 @@ class ApiMethods {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    return _callHandleRequest(
+    return await _callHandleRequest(
       _dio.post(
         options: Options(
           headers: headers,
@@ -45,7 +45,7 @@ class ApiMethods {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    return _callHandleRequest(
+    return await _callHandleRequest(
       _dio.patch(
         options: Options(
           headers: headers,
@@ -61,7 +61,7 @@ class ApiMethods {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    return _callHandleRequest(
+    return await _callHandleRequest(
       _dio.put(
         options: Options(
           headers: headers,
@@ -76,7 +76,7 @@ class ApiMethods {
     String path, {
     Map<String, dynamic>? headers,
   }) async {
-    return _callHandleRequest(
+    return await _callHandleRequest(
       _dio.delete(
         options: Options(
           headers: headers,

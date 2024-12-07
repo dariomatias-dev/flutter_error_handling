@@ -15,34 +15,34 @@ class HttpController {
 
   final BuildContext Function() _getContext;
 
-  static final _api = ApiService.http;
+  final _api = ApiService.http;
 
   int statusCode = statusCodes.first;
 
-  void request() {
-    showLoadingScreen(
+  Future<void> request() async {
+    final result = await showLoadingScreen(
       _getContext(),
       () async {
-        final result = await _api.get('$statusCode');
+        return await _api.get('$statusCode');
+      },
+    );
 
-        result.handle(
-          getContext: _getContext,
-          success: (value) {},
-          failure: (type, message, handleError) {
-            _handleError(type, handleError);
-          },
-        );
+    await result.handle(
+      getContext: _getContext,
+      success: (value) {},
+      failure: (type, message, handleError) async {
+        await _handleError(type, handleError);
       },
     );
   }
 
-  void _handleError(
+  Future<void> _handleError(
     FailureType type,
-    void Function() handleError,
-  ) {
+    Future<void> Function() handleError,
+  ) async {
     switch (type) {
       case FailureType.badGateway:
-        showDialog(
+        await showDialog(
           context: _getContext(),
           builder: (context) {
             return AlertDialog(
@@ -67,7 +67,7 @@ class HttpController {
         );
         break;
       default:
-        handleError();
+        await handleError();
     }
   }
 

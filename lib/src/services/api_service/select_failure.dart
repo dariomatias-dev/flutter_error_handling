@@ -3,8 +3,8 @@ part of 'api_service.dart';
 Failure _selectFailure(
   DioException err,
 ) {
-  FailureType type = FailureType.unknownError;
-  String message = 'An unknown error occurred';
+  FailureType? type;
+  String? message;
 
   switch (err.type) {
     case DioExceptionType.cancel:
@@ -82,7 +82,6 @@ Failure _selectFailure(
           message = 'Unknown error occurred: ${err.response?.statusCode}';
           break;
       }
-      break;
     default:
       if (err.message?.contains('SocketException') ?? false) {
         type = FailureType.networkError;
@@ -91,7 +90,6 @@ Failure _selectFailure(
         type = FailureType.unknownError;
         message = 'Unknown error: ${err.message}';
       }
-      break;
   }
 
   return Failure(

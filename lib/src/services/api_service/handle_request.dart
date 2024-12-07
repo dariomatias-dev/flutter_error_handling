@@ -13,14 +13,20 @@ Future<Either> _handleRequest(
       );
     }
 
+    String message = 'Status Code: ${result.statusCode}.';
+
+    if (result.data.toString().isNotEmpty) {
+      message += '\n${result.data}';
+    }
+
     logger.w(
       'Warning Log',
-      error: result.data,
+      error: message,
     );
 
     return Failure(
       type: FailureType.unknownError,
-      message: result.data,
+      message: message,
     );
   } on DioException catch (err, stackTrace) {
     logger.e(
