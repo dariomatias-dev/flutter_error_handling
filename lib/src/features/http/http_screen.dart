@@ -26,7 +26,7 @@ class _HttpScreenState extends State<HttpScreen> {
 
   @override
   void dispose() {
-    _controller.close();
+    _controller.dispose();
 
     super.dispose();
   }

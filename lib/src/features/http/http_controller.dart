@@ -6,7 +6,7 @@ import 'package:flutter_error_handling/src/features/http/status_codes.dart';
 
 import 'package:flutter_error_handling/src/services/api_service/api_service.dart';
 
-import 'package:flutter_error_handling/src/shared/utils/show_loading_screen.dart';
+import 'package:flutter_error_handling/src/shared/utils/show_loading.dart';
 
 class HttpController {
   HttpController({
@@ -20,7 +20,7 @@ class HttpController {
   int statusCode = statusCodes.first;
 
   Future<void> request() async {
-    final result = await showLoadingScreen(
+    final result = await showLoading(
       _getContext(),
       () async {
         return await _api.get('$statusCode');
@@ -71,7 +71,7 @@ class HttpController {
     }
   }
 
-  void close() {
+  void dispose() {
     _api.close();
   }
 }

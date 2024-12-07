@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-Future<T> showLoadingScreen<T>(
+Future<T> showLoading<T>(
   BuildContext context,
   Future<T> Function() request,
 ) async {
