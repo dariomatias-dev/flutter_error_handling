@@ -1,6 +1,8 @@
-# Request Results Management in Flutter
+# Results Management in Flutter
 
-This project introduces a custom solution for efficiently handling request results in Flutter applications. Leveraging the `Either` abstraction, the system elegantly manages both success and failure scenarios, allowing for detailed handling of each case. Additionally, it includes a robust global error management system to ensure a seamless user experience without interruptions.
+A custom solution offering efficient and flexible management of outcomes in Flutter applications. Based on the `Either` abstraction, it simplifies handling success and failure scenarios, enabling detailed and tailored management for each situation.  
+
+The solution supports both local handling, where specific cases can be managed individually, and global handling, which applies consistent rules across all cases. Additionally, a robust global error management system ensures a smooth and uninterrupted user experience, even in unexpected situations.
 
 ## Requests
 
@@ -21,7 +23,7 @@ class ApiService {
 Create an instance of `ApiService` calling the `get` method on the base URL of the requests:
 
 ```dart
-static final _api = ApiService.http;
+final _api = ApiService.http;
 ```
 
 ### HTTP Requests
@@ -58,21 +60,21 @@ final result = await _api.post(
 The result of the requests will be an instance of Either, which can be either a success or a failure. To handle the result, access the `handle` method, passing a function to obtain the current context, what to do when a success occurs, and what to do when a failure occurs:
 
 ```dart
-result.handle(
+await result.handle(
   getContext: _getContext,
   success: (value) {},
-  failure: (type, message, handleError) {},
+  failure: (type, message, handleError) async {},
 );
 ```
 
 When a failure occurs and you want the default handling to be performed, call the `handleError` function:
 
 ```dart
-result.handle(
+await result.handle(
   getContext: _getContext,
   success: (value) {},
-  failure: (type, message, handleError) {
-    handleError();
+  failure: (type, message, handleError) async {
+    await handleError();
   },
 );
 ```
@@ -80,15 +82,15 @@ result.handle(
 The default handling will only be applied when `handleError` is called, allowing for local handling as follows:
 
 ```dart
-result.handle(
+await result.handle(
   getContext: _getContext,
   success: (value) {},
-  failure: (type, message, handleError) {
+  failure: (type, message, handleError) async {
     switch (type) {
       case FailureType.badGateway:
         // Local Error Handling
       default:
-        handleError();
+        await handleError();
     }
   },
 );
