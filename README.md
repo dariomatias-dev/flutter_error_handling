@@ -1,8 +1,8 @@
-# Results Management in Flutter
+# Request Management in Flutter
 
-A custom solution offering efficient and flexible management of outcomes in Flutter applications. Based on the `Either` abstraction, it simplifies handling success and failure scenarios, enabling detailed and tailored management for each situation.  
+A custom solution offering efficient and flexible management of requests in Flutter applications. Based on the `Either` abstraction, it simplifies handling success and failure scenarios, enabling detailed and tailored management for each situation.
 
-The solution supports both local handling, where specific cases can be managed individually, and global handling, which applies consistent rules across all cases. Additionally, a robust global error management system ensures a smooth and uninterrupted user experience, even in unexpected situations.
+The solution supports both local management, where specific cases can be handled individually, and global management, which applies consistent rules across all cases. Additionally, a robust global error management system ensures a smooth and uninterrupted user experience, even in unexpected situations.
 
 ## Requests
 
@@ -10,6 +10,14 @@ The solution supports both local handling, where specific cases can be managed i
 
 In `ApiService`, define the base URLs that will be used, using `http` in the same scheme as `http`:
 
+__Class with URLs:__
+```dart
+class Urls {
+  static const httpUrl = 'https://dummyjson.com/http';
+}
+```
+
+__Service Class:__
 ```dart
 class ApiService {
   static ApiMethods get http => ApiMethods(
@@ -95,3 +103,25 @@ await result.handle(
   },
 );
 ```
+
+<br/>
+
+## Autor
+
+<img style="border-radius: 50%" src="https://raw.githubusercontent.com/dariomatias-dev/images/main/my_photo/my_photo.png" width="100px" alt="My photo"/>
+
+<sub>
+  <b>Dário Matias</b>
+</sub>
+
+<p>
+  Solution developed for study and learning purposes, available under the MIT license.
+</p>
+
+<a href="https://www.linkedin.com/in/dariomatias-dev/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+
+<a href="https://www.instagram.com/dariomatias_dev/?theme=dark" target="_blank">
+  <img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+</a>
