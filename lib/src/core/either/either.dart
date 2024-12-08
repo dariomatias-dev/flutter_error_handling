@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 part 'success.dart';
+part 'failure_type.dart';
 part 'failure.dart';
 
 abstract class Either<E extends Exception, S> {
